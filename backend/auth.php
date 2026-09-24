@@ -12,12 +12,12 @@ function creerSession(int $utilisateurId): string
 {
     $pdo = getConnexion();
     $sessionId = bin2hex(random_bytes(32));
-    $expiration = date('Y-m-d H:i:s', time() + SESSION_DUREE_SECONDES);
 
     $stmt = $pdo->prepare(
-        'INSERT INTO sessions (id, utilisateur_id, date_expiration) VALUES (:id, :uid, :exp)'
+        'INSERT INTO sessions (id, utilisateur_id, date_expiration)
+         VALUES (:id, :uid, DATE_ADD(NOW(), INTERVAL ' . (int) SESSION_DUREE_SECONDES . ' SECOND))'
     );
-    $stmt->execute(['id' => $sessionId, 'uid' => $utilisateurId, 'exp' => $expiration]);
+    $stmt->execute(['id' => $sessionId, 'uid' => $utilisateurId]);
 
     setcookie(COOKIE_NOM, $sessionId, [
         'expires'  => time() + SESSION_DUREE_SECONDES,

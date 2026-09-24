@@ -5,8 +5,8 @@
 
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'db');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_USER', 'phpmyadmin');
+define('DB_PASS', '16022008');
 
 define('FRONTEND_ORIGIN', 'http://localhost:3000');
 
