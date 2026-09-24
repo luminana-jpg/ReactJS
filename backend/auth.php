@@ -19,8 +19,9 @@ function creerSession(int $utilisateurId): string
     );
     $stmt->execute(['id' => $sessionId, 'uid' => $utilisateurId]);
 
+    // Pas d'option 'expires' : le cookie est un cookie de session,
+    // supprimé par le navigateur à sa fermeture.
     setcookie(COOKIE_NOM, $sessionId, [
-        'expires'  => time() + SESSION_DUREE_SECONDES,
         'path'     => '/',
         'httponly' => true,
         'secure'   => false,   // mettre à true en production (HTTPS)
